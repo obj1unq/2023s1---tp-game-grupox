@@ -1,0 +1,24 @@
+import wollok.game.*
+import moto.*
+import direcciones.*
+
+program tron {
+	//PANTALLA
+	game.height(10)
+	game.width(20)
+	//IMAGENES OBJECTOS
+	game.addVisual(moto)
+	
+	//CONTROLES
+	keyboard.up().onPressDo({ moto.moverSiPuede(arriba, 0)  })
+	keyboard.down().onPressDo({ moto.moverSiPuede(abajo, 0) })
+	keyboard.left().onPressDo({ moto.moverSiPuede(izquierda, 0) })
+	keyboard.right().onPressDo({ moto.moverSiPuede(derecha, 0) })
+	//REFRESCO PANTALLA
+	game.onTick(200, "ALKORTE", {moto.alcorte()}
+	)
+	game.onCollideDo(moto, { algo => algo.chocar(moto)})
+	//EMPEZAR JUEGO
+	game.start()
+
+}
