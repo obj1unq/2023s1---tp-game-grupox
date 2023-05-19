@@ -2,7 +2,7 @@ import wollok.game.*
 import direcciones.*
 
 object muerto {
-	method iniciar() {
+	method iniciar(moto) {
 		game.say(moto,  "Choque")
 		game.removeTickEvent("ALKORTE")
 	}
@@ -12,7 +12,7 @@ object muerto {
 }
 
 object vivo {
-	method iniciar(){
+	method iniciar(moto){
 		
 	}	
 	method puedeMover(){
@@ -20,6 +20,15 @@ object vivo {
 	}
 }
 
+object ganador {
+	method iniciar(moto){
+		game.say(moto, "Gane")
+		game.removeTickEvent("ALKORTE")
+	}
+	method puedeMover(){
+		return false
+	}
+}
 
 class Trazo {
 	
@@ -28,14 +37,16 @@ class Trazo {
 	
 	method chocar(objeto){
 		objeto.morir()
+		objeto.enemigo().gane()
 	}
 	
 }
-object moto {
+class Moto {
 	var property estado = vivo
 	var property position = game.at(0,0)
 	var property direccionApuntada  = arriba
 	var property posicionAnterior = game.at(0,0)	
+	var property enemigo = null
 	method image() {
 		return "Moto" + self.direccionApuntada().toString() + ".png"
 	}
@@ -47,13 +58,16 @@ object moto {
 
 	method estado(_estado){
 		estado = _estado
-		estado.iniciar()
+		estado.iniciar(self)
 	}
 	
 	method morir(){
 		self.estado(muerto)
 	}
 	
+	method gane(){
+		self.estado(ganador)
+	}
 	method validarDesplazar(direccion, cantidad) {
 		direccion.validarMover(self, cantidad)
 	}
@@ -78,6 +92,9 @@ object moto {
 			self.posicionAnterior(self.position())
 			self.desplazar(direccionApuntada, 1)
 			self.generarTrazo()
+		} else {
+			self.morir()
+			enemigo.gane()
 		}
 	}
 
@@ -85,6 +102,6 @@ object moto {
 		game.addVisual(new Trazo(position=self.posicionAnterior()))
 	} 
 	
-	
+
 	
 }

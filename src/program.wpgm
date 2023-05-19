@@ -7,17 +7,30 @@ program tron {
 	game.height(10)
 	game.width(20)
 	//IMAGENES OBJECTOS
-	game.addVisual(moto)
+	const moto1 = new Moto()
+	const moto2 = new Moto()
 	
+	moto1.enemigo(moto2)
+	moto2.enemigo(moto1)
+	
+	moto2.position(game.at(9,0))
+	game.addVisual(moto1)
+	game.addVisual(moto2)
 	//CONTROLES
-	keyboard.up().onPressDo({ moto.moverSiPuede(arriba, 0)  })
-	keyboard.down().onPressDo({ moto.moverSiPuede(abajo, 0) })
-	keyboard.left().onPressDo({ moto.moverSiPuede(izquierda, 0) })
-	keyboard.right().onPressDo({ moto.moverSiPuede(derecha, 0) })
+	keyboard.up().onPressDo({ moto1.moverSiPuede(arriba, 0)  })
+	keyboard.down().onPressDo({ moto1.moverSiPuede(abajo, 0) })
+	keyboard.left().onPressDo({ moto1.moverSiPuede(izquierda, 0) })
+	keyboard.right().onPressDo({ moto1.moverSiPuede(derecha, 0) })
+	keyboard.w().onPressDo({moto2.moverSiPuede(arriba,0)})
+	keyboard.s().onPressDo({moto2.moverSiPuede(abajo,0)})
+	keyboard.a().onPressDo({moto2.moverSiPuede(izquierda,0)})
+	keyboard.d().onPressDo({moto2.moverSiPuede(derecha,0)})
+	
 	//REFRESCO PANTALLA
-	game.onTick(200, "ALKORTE", {moto.alcorte()}
-	)
-	game.onCollideDo(moto, { algo => algo.chocar(moto)})
+	game.onTick(200, "ALKORTE", {moto1.alcorte()})
+	game.onTick(200, "ALKORTE", {moto2.alcorte()})
+	game.onCollideDo(moto1, { algo => algo.chocar(moto1)})
+	game.onCollideDo(moto2, { algo => algo.chocar(moto2)})
 	//EMPEZAR JUEGO
 	game.start()
 
