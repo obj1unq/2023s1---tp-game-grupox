@@ -1,5 +1,4 @@
-# Nombre del juego (<- borrar y completar)
-
+WollTron
 ## Equipo de desarrollo
 
 - Alguien
