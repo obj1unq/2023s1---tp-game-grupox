@@ -9,5 +9,12 @@ class Jugador {
 		
 	}
 	
+	method initialize(){
+		moto.jugador(self)
+	}
+	
+	method motoEnemiga(){
+		return jugadorEnemigo.moto()
+	}
 	
 }
