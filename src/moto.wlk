@@ -46,7 +46,12 @@ class Moto {
 	var property position = game.at(0,0)
 	var property direccionApuntada  = arriba
 	var property posicionAnterior = game.at(0,0)	
-	var property enemigo = null
+	var property jugador = null
+	
+	method enemigo(){
+		return jugador.motoEnemiga()
+	}
+	
 	method image() {
 		return "Moto" + self.direccionApuntada().toString() + ".png"
 	}
@@ -94,7 +99,7 @@ class Moto {
 			self.generarTrazo()
 		} else {
 			self.morir()
-			enemigo.gane()
+			self.enemigo().gane()
 		}
 	}
 
