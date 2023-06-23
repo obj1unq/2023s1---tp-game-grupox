@@ -1,14 +1,33 @@
 import wollok.game.*
 import direcciones.*
 
-object muerto {
+class Estado {
 	method iniciar(moto) {
-		game.say(moto,  "Choque")
+		game.say(moto,  self.mensaje())
 		game.removeTickEvent("ALKORTE")
 	}
+	
 	method puedeMover(){
 		return false
 	}
+	
+	method mensaje()
+}
+
+object muerto inherits Estado {
+	
+	override method mensaje(){
+		return "Choque"
+	}
+
+}
+
+object ganador inherits Estado { 
+	
+	override method mensaje(){
+		return "Gane"
+	}
+	 
 }
 
 object vivo {
@@ -17,16 +36,6 @@ object vivo {
 	}	
 	method puedeMover(){
 		return true
-	}
-}
-
-object ganador {
-	method iniciar(moto){
-		game.say(moto, "Gane")
-		game.removeTickEvent("ALKORTE")
-	}
-	method puedeMover(){
-		return false
 	}
 }
 
