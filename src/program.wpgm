@@ -5,8 +5,8 @@ import jugador.*
 
 program tron {
 	//PANTALLA
-	game.height(10)
-	game.width(20)
+	game.height(18)
+	game.width(30)
 	//IMAGENES OBJECTOS
 	
 	const jugador1 = new Jugador()

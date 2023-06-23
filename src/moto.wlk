@@ -3,7 +3,8 @@ import direcciones.*
 
 object muerto {
 	method iniciar(moto) {
-		game.say(moto,  "Choque")
+		moto.jugador().restarVida()
+		game.say(moto,  "Choque " + "Me quedan " + moto.jugador().cantidadDeVidas() + " vidas")
 		game.removeTickEvent("ALKORTE")
 	}
 	method puedeMover(){
