@@ -1,39 +1,9 @@
+import juego.*
 import wollok.game.*
-import moto.*
-import direcciones.*
-import jugador.*
+import mainMenu.*
 
-program tron {
-	//PANTALLA
-	game.height(10)
-	game.width(20)
-	//IMAGENES OBJECTOS
-	
-	const jugador1 = new Jugador()
-	const jugador2 = new Jugador()
-
-	jugador1.jugadorEnemigo(jugador2)
-	jugador2.jugadorEnemigo(jugador1)
-	
-	jugador1.moto().position(game.at(9,0))
-	game.addVisual(jugador1.moto())
-	game.addVisual(jugador2.moto())
-	//CONTROLES
-	keyboard.up().onPressDo({ jugador1.moto().moverSiPuede(arriba, 0)  })
-	keyboard.down().onPressDo({ jugador1.moto().moverSiPuede(abajo, 0) })
-	keyboard.left().onPressDo({ jugador1.moto().moverSiPuede(izquierda, 0) })
-	keyboard.right().onPressDo({ jugador1.moto().moverSiPuede(derecha, 0) })
-	keyboard.w().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
-	keyboard.s().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
-	keyboard.a().onPressDo({jugador2.moto().moverSiPuede(izquierda,0)})
-	keyboard.d().onPressDo({jugador2.moto().moverSiPuede(derecha,0)})
-	
-	//REFRESCO PANTALLA
-	game.onTick(200, "ALKORTE", {jugador1.moto().alcorte()})
-	game.onTick(200, "ALKORTE", {jugador2.moto().alcorte()})
-	game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
-	game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
-	//EMPEZAR JUEGO
+program prueba{
+	juego.configurar()
+	mainMenu.mostrar()
 	game.start()
-
 }
