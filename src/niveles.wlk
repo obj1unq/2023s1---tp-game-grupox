@@ -59,8 +59,8 @@ object nivel1 {
 	}
 	
 	method confiuracionTeclado(){
-		keyboard.w().onPressDo({jugador1.moto().moverSiPuede(arriba, 0)})
-		keyboard.s().onPressDo({jugador1.moto().moverSiPuede(abajo, 0)})
+		//keyboard.w().onPressDo({jugador1.moto().moverSiPuede(arriba, 0)})
+		//keyboard.s().onPressDo({jugador1.moto().moverSiPuede(abajo, 0)})
 		keyboard.a().onPressDo({jugador1.moto().moverSiPuede(izquierda,0)})
 		keyboard.d().onPressDo({jugador1.moto().moverSiPuede(derecha,0)})
 	}
