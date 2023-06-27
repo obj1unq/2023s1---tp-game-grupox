@@ -1,12 +1,15 @@
+import wollok.game.*
 import moto.*
+import visuales.*
 
 class Jugador {
-	var property vida = 3
+	var property vida
+	//var property position = game.at(1,9)
 	const property moto = new Moto()
 	var property jugadorEnemigo  = null
-		
-	method restarVida(){
-		
+	
+	method cantidadDeVidas(){
+		return vida.vidas()
 	}
 	
 	method initialize(){
@@ -15,6 +18,20 @@ class Jugador {
 	
 	method motoEnemiga(){
 		return jugadorEnemigo.moto()
+	}
+	
+	method puedeJugar(){
+		return self.cantidadDeVidas() > 0
+	}
+	
+	method validarSiPuedeJugar(){
+		if(not self.puedeJugar()){
+			self.error("No me quedan mas vidas para jugar")
+		}
+	}
+	
+	method image(){
+		return "Motoabajo.png"
 	}
 	
 }

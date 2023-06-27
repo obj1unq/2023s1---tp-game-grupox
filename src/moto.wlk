@@ -1,9 +1,10 @@
 import wollok.game.*
 import direcciones.*
 
+
 class Estado {
 	method iniciar(moto) {
-		game.say(moto,  self.mensaje())
+		game.say(moto,  self.mensaje() + "Me quedan " + moto.jugador().cantidadDeVidas() + " vidas")
 		game.removeTickEvent("ALKORTE")
 	}
 	
@@ -15,6 +16,16 @@ class Estado {
 }
 
 object muerto inherits Estado {
+	
+	override method iniciar(moto){
+		moto.jugador().vida().perderVida()
+		super(moto)
+		if(moto.jugador().cantidadDeVidas() > 0){
+			//TODO: que cuando muera, reinicie el juego, manteniendo la cantidad de vidas
+			//que le queda a cada jugador
+			//game.clear()
+		}
+	}
 	
 	override method mensaje(){
 		return "Choque"
