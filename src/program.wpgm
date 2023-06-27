@@ -2,22 +2,33 @@ import wollok.game.*
 import moto.*
 import direcciones.*
 import jugador.*
+import visuales.*
 
 program tron {
 	//PANTALLA
-	game.height(18)
-	game.width(30)
+	game.height(10)
+	game.width(20)
 	//IMAGENES OBJECTOS
 	
-	const jugador1 = new Jugador()
-	const jugador2 = new Jugador()
-
+	const jugador1 = new Jugador(vida = new Vida(position = game.at(18,9)))
+	const jugador2 = new Jugador(vida = new Vida(position = game.at(2,9)))
+	
+	jugador1.vida().agregarVida()
+	jugador2.vida().agregarVida()
+	
+	const player1 = new Player(numero=1, position = game.at(17,9))
+	const player2 = new Player(numero=2, position = game.at(1,9))
+	
+	player1.agregarPlayer()
+	player2.agregarPlayer()
+	
 	jugador1.jugadorEnemigo(jugador2)
 	jugador2.jugadorEnemigo(jugador1)
 	
 	jugador1.moto().position(game.at(9,0))
 	game.addVisual(jugador1.moto())
 	game.addVisual(jugador2.moto())
+	
 	//CONTROLES
 	keyboard.up().onPressDo({ jugador1.moto().moverSiPuede(arriba, 0)  })
 	keyboard.down().onPressDo({ jugador1.moto().moverSiPuede(abajo, 0) })
