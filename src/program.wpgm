@@ -10,8 +10,8 @@ program tron {
 	game.width(20)
 	//IMAGENES OBJECTOS
 	
-	const jugador1 = new Jugador(vida = new Vida(position = game.at(18,9)))
-	const jugador2 = new Jugador(vida = new Vida(position = game.at(2,9)))
+	const jugador1 = new Jugador(vida = new Vida(position = game.at(2,9)))
+	const jugador2 = new Jugador(vida = new Vida(position = game.at(18,9)))
 	
 	jugador1.vida().agregarVida()
 	jugador2.vida().agregarVida()

@@ -1,6 +1,6 @@
 import wollok.game.*
 import direcciones.*
-import juego.*
+
 
 class Estado {
 	method iniciar(moto) {
