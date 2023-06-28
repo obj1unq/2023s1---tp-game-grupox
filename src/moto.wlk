@@ -166,7 +166,7 @@ class MotoExplosiva inherits MotoRapida {
 			self.generarTrazoRapido(self.posicionAnterior().right(1))
 			trazoOn = true
 			self.generarTrazoRapido(self.posicionAnterior().left(1))
-		} else 
+		} else if ((self.direccionApuntada() == izquierda or self.direccionApuntada() == derecha))
 		    trazoOn = true
 			self.generarTrazoRapido(self.posicionAnterior().down(1))
 			trazoOn = true
