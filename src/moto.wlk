@@ -1,5 +1,6 @@
 import wollok.game.*
 import direcciones.*
+import escenario.*
 
 
 class Estado {
@@ -50,17 +51,7 @@ object vivo {
 	}
 }
 
-class Trazo {
-	
-	var property position
-	var property image = "trazo.png"
-	
-	method chocar(objeto){
-		objeto.morir()
-		objeto.enemigo().gane()
-	}
-	
-}
+
 class Moto {
 	var property estado = vivo
 	var property position = game.at(0,0)
@@ -126,7 +117,5 @@ class Moto {
 	method generarTrazo(){
 		game.addVisual(new Trazo(position=self.posicionAnterior()))
 	} 
-	
-
 	
 }

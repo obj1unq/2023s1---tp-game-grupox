@@ -30,8 +30,5 @@ class Jugador {
 		}
 	}
 	
-	method image(){
-		return "Motoabajo.png"
-	}
 	
 }
