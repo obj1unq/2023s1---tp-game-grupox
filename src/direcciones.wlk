@@ -4,7 +4,7 @@ object screen {
 
 	method validarPuedeIr(position) {
 		if (not self.puedeIr(position)) {
-			self.error("No puedo ir ahÃ­")
+			self.error("No puedo ir ahi")
 		}
 	}
 

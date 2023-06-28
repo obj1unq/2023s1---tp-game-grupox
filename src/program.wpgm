@@ -5,12 +5,12 @@ import jugador.*
 
 program tron {
 	//PANTALLA
-	game.height(10)
-	game.width(20)
+	game.height(15)
+	game.width(25)
 	//IMAGENES OBJECTOS
 	
-	const jugador1 = new Jugador()
-	const jugador2 = new Jugador()
+	const jugador1 = new Jugador(moto=new MotoExplosiva())
+	const jugador2 = new Jugador(moto=new MotoBasica())
 
 	jugador1.jugadorEnemigo(jugador2)
 	jugador2.jugadorEnemigo(jugador1)
@@ -29,8 +29,9 @@ program tron {
 	keyboard.d().onPressDo({jugador2.moto().moverSiPuede(derecha,0)})
 	
 	//REFRESCO PANTALLA
-	game.onTick(200, "ALKORTE", {jugador1.moto().alcorte()})
-	game.onTick(200, "ALKORTE", {jugador2.moto().alcorte()})
+	game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()}
+	)
+	game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 	game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
 	game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
 	//EMPEZAR JUEGO
