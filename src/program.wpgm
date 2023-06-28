@@ -1,12 +1,8 @@
 import juego.*
 import wollok.game.*
 import mainMenu.*
-import moto.*
-import direcciones.*
-import jugador.*
-import visuales.*
 
-program prueba{
+program Tron{
 	juego.configurar()
 	mainMenu.mostrar()
 	game.start()
