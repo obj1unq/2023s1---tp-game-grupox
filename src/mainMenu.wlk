@@ -2,9 +2,12 @@ import wollok.game.*
 import juego.*
 import escenario.*
 import niveles.*
+import jugador.*
+import visuales.*
+import moto.*
 
-object mainMenu {
-	const board = new BoardGround(image = "tron_2.jpg")
+class Menu {
+	const property board = new BoardGround(image = "tron_2.jpg")
 	const property objetosEnElMenu = []
 	
 	method elementoDelMenu(indice) = objetosEnElMenu.get(indice).position().left(1)
@@ -15,62 +18,188 @@ object mainMenu {
 		game.addVisual(item)
 		objetosEnElMenu.add(item)
 	}
+
+	method mostrar()
 	
-	method mostrar(){
+	method configurarTeclado()
+}
+
+object mainMenu inherits Menu {
+	
+	override method mostrar() {
 		game.addVisual(board)
 		self.agregarItem(newGame)
 		self.agregarItem(howTo)
-		game.addVisual(cursor)
+		game.addVisual(cursorMenu)
 		self.configurarTeclado()
 	}
 	
-	method configurarTeclado(){
-		keyboard.s().onPressDo({cursor.bajar()})
-		keyboard.w().onPressDo({cursor.subir()})
-		keyboard.enter().onPressDo({cursor.seleccionActual().ejecutar()})
+	override method configurarTeclado(){
+		keyboard.s().onPressDo({cursorMenu.bajar()})
+		keyboard.w().onPressDo({cursorMenu.subir()})
+		keyboard.enter().onPressDo({cursorMenu.seleccionActual().ejecutar()})
 	}
 	
 }
 
-object newGame{
+
+class Eleccion {
 	
-	method image() = "startGame.png"
+	method image() = self.imagenElegida()
+	
+	method imagenElegida()
 	
 	method position() = game.at(6,7)
 	
 	method ejecutar() {
 		game.clear()
+	}
+}
 
-	nivel1.empezar()
-	//selectorNiveles.mostrar()??
+object newGame inherits Eleccion {
+	
+	override method imagenElegida() {
+		return "startGame.png"
+	}
+	
+	override method position() = game.at(6,7)
+	
+	override method ejecutar() {
+		super()
+		eleccionDeMotos.mostrar()
+		keyboard.r().onPressDo({
+			game.clear()
+			mainMenu.mostrar()
+		})
+	}
+}
+
+object eleccionDeMotos inherits Menu(board = new BoardGround(image = "eleccionFondo.jpg")) {
+	
+	override method mostrar() {
+		game.addVisual(board)
+		self.agregarItem(basica)
+		game.addVisual(barraBasica)
+		self.agregarItem(rapida)
+		game.addVisual(barraRapida)
+		self.agregarItem(explosiva)
+		game.addVisual(barraExplosiva)
+		game.addVisual(cursorEleccion)
+		self.configurarTeclado()
+	}
+	
+	override method configurarTeclado() {
+		keyboard.s().onPressDo({cursorEleccion.bajar()})
+		keyboard.w().onPressDo({cursorEleccion.subir()})
+		keyboard.enter().onPressDo({cursorEleccion.seleccionActual().ejecutar()})
 	}
 	
 }
 
-object howTo {
+object basica inherits Eleccion {
+	
+	override method imagenElegida() {
+		return "motoBasicaAbajo.png"
+	}
+	
+	override method ejecutar() {
+		super()
+		//falta creacion de moto para cada jugador
+		nivel1.empezar()
+	}
+}
+
+object rapida inherits Eleccion {
+	
+	override method imagenElegida() {
+		return "motoRapidaAbajo.png"
+	}
+	
+	override method position() = game.at(6,5)
+	
+	override method ejecutar() {
+		super()
+		//falta creacion de moto para cada jugador
+		nivel1.empezar()
+	}
+}
+
+object explosiva inherits Eleccion {
+	
+	override method imagenElegida() {
+		return "motoExplosivaAbajo.png"
+	}
+	
+	override method position() = game.at(6,3)
+	
+	override method ejecutar() {
+		super()
+		//falta creacion de moto para cada jugador
+		nivel1.empezar()
+	}
+}
+
+class Imagen {	
+	method image() = self.imagenElegida()
+	
+	method imagenElegida()
+	
+	method position() = game.at(0,0)
+}
+
+object barraBasica inherits Imagen {
+	override method imagenElegida() {
+		return "barraBasica.png"
+	}
+	
+	override method position() = basica.position().right(2)
+}
+
+object barraRapida inherits Imagen {
+	
+	override method imagenElegida() {
+		return "barraRapida.png"
+	}
+	
+	override method position() = rapida.position().right(2)
+}
+
+object barraExplosiva inherits Imagen {
+	
+	override method imagenElegida() {
+		return "barraExplosiva.png"
+	}
+	
+	override method position() = explosiva.position().right(2)
+}
+
+object howTo inherits Eleccion {
 	const fondo = new BoardGround(image = "INSTRUCCIONES PEDORRETAS.png")
-	method image() = "howToPlay.png"
 	
-	method position() = game.at(6, 5)
+	override method imagenElegida() {
+		return "howToPlay.png"
+	}
 	
-	method ejecutar(){
-		game.clear()
+	override method position() = game.at(6,5)
+	
+	override method ejecutar() {
+		super()
 		game.addVisual(fondo)
 		keyboard.r().onPressDo({
 			game.clear()
 			mainMenu.mostrar()
 		})
 	}
-
 }
 
-object cursor {
+class Cursor {
 	var index = 0
-	var property position = newGame.position().left(1)
+	var property position = game.at(0,0)
+	const property menu = null
 	
 	method image() = "cursor.png" 
 	
-	method finalDelMenu() = mainMenu.objetosEnElMenu().size() - 1 
+	method finalDelMenu() = menu.objetosEnElMenu().size() - 1 
 	
 	method principioDelMenu() = 0 
 	
@@ -82,7 +211,7 @@ object cursor {
 		} else {
 			index = self.principioDelMenu()
 		}
-		self.position(mainMenu.elementoDelMenu(index))
+		self.position(menu.elementoDelMenu(index))
 	}
 	
 	method subir() {
@@ -91,16 +220,22 @@ object cursor {
 		} else {
 			index = self.finalDelMenu()
 		}
-		self.position(mainMenu.elementoDelMenu(index))
+		self.position(menu.elementoDelMenu(index))
 	}
 	
 	method puedoSubir() {
-		return index != self.principioDelMenu() and mainMenu.contieneMenu()
+		return index != self.principioDelMenu() and menu.contieneMenu()
 	}
 	
 	
 	method puedoBajar() {
-		return index != self.finalDelMenu() and mainMenu.contieneMenu()
+		return index != self.finalDelMenu() and menu.contieneMenu()
 	}
 	
+}
+
+object cursorMenu inherits Cursor(position = newGame.position().left(1), menu = mainMenu){
+}
+
+object cursorEleccion inherits Cursor(position = basica.position().left(1), menu = eleccionDeMotos){
 }

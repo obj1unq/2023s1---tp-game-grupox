@@ -5,7 +5,7 @@ import visuales.*
 class Jugador {
 	var property vida
 	//var property position = game.at(1,9)
-	const property moto = new MotoBasica()
+	const property moto
 	var property jugadorEnemigo  = null
 	
 	method cantidadDeVidas(){
