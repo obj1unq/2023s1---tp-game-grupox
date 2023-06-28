@@ -1,6 +1,10 @@
 import juego.*
 import wollok.game.*
 import mainMenu.*
+import moto.*
+import direcciones.*
+import jugador.*
+import visuales.*
 
 program prueba{
 	juego.configurar()
