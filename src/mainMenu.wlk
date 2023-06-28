@@ -42,14 +42,17 @@ object mainMenu inherits Menu {
 	
 }
 
-
-class Eleccion {
-	
+class Imagen {	
 	method image() = self.imagenElegida()
 	
 	method imagenElegida()
 	
-	method position() = game.at(6,7)
+	method position()
+}
+
+class Eleccion inherits Imagen {
+	
+	override method position() = game.at(6,7)
 	
 	method ejecutar() {
 		game.clear()
@@ -61,8 +64,6 @@ object newGame inherits Eleccion {
 	override method imagenElegida() {
 		return "startGame.png"
 	}
-	
-	override method position() = game.at(6,7)
 	
 	override method ejecutar() {
 		super()
@@ -137,14 +138,6 @@ object explosiva inherits Eleccion {
 		//falta creacion de moto para cada jugador
 		nivel1.empezar()
 	}
-}
-
-class Imagen {	
-	method image() = self.imagenElegida()
-	
-	method imagenElegida()
-	
-	method position() = game.at(0,0)
 }
 
 object barraBasica inherits Imagen {

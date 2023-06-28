@@ -157,18 +157,25 @@ class MotoExplosiva inherits MotoRapida {
 		return "MotoExplosiva"
 	}
 	
-	override method efectoDeAlcorte() {
-		self.generarTrazoExplosivo()
+	override method generarTrazoRapido(posicion) {
+		if (self.trazoOn() && self.apuntaHaciaArribaOAbajo()) {
+			self.generarTrazo(self.posicionAnterior().left(1))
+			self.generarTrazo(self.posicionAnterior().right(1))
+			trazoOn = false
+			} else if (self.trazoOn() && self.apuntaHaciaIzquierdaODerecha()) {
+			self.generarTrazo(self.posicionAnterior().up(1))
+			self.generarTrazo(self.posicionAnterior().down(1))
+			trazoOn = false
+			} else 
+			trazoOn = true
 	}
 	
-	method generarTrazoExplosivo() {
-		if (self.direccionApuntada() == arriba or self.direccionApuntada() == abajo) {
-			trazoOn = true
-			self.generarTrazoRapido(self.posicionAnterior().right(1))
-			trazoOn = true
-			self.generarTrazoRapido(self.posicionAnterior().left(1))
-		} //else if ((self.direccionApuntada() == izquierda or self.direccionApuntada() == derecha))
-		  //self.generarTrazoRapido(self.posicionAnterior().down(1))
-		  //self.generarTrazoRapido(self.posicionAnterior().up(1))
+	method apuntaHaciaArribaOAbajo() {
+		return direccionApuntada == arriba or direccionApuntada == abajo
+	}
+	
+	method apuntaHaciaIzquierdaODerecha() {
+		return direccionApuntada == izquierda or direccionApuntada == derecha
 	}
 }
+	

@@ -14,9 +14,6 @@ object nivel1 {
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
 	
-
-	//const jugador2 = new Jugador()
-	
 	method empezar(){
 		self.dibujarMuros()
 		self.agregarJugadores()
