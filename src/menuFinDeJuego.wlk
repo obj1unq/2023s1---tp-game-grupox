@@ -7,26 +7,28 @@ object finDelJuego inherits Menu {
 		game.addVisual(board)
 		self.agregarItem(volverAlMenu)
 		self.agregarItem(salirDelJuego)
-		game.addVisual(cursorMenu)
+		game.addVisual(cursorFinDeJuego)
 		self.configurarTeclado()
 	}
 	
 	override method configurarTeclado() {
-		keyboard.up().onPressDo({cursorMenu.subir()})
-		keyboard.down().onPressDo({cursorMenu.bajar()})
-		keyboard.enter().onPressDo({cursorMenu.seleccionActual().ejecutar()})
+		keyboard.up().onPressDo({cursorFinDeJuego.subir()})
+		keyboard.down().onPressDo({cursorFinDeJuego.bajar()})
+		keyboard.enter().onPressDo({cursorFinDeJuego.seleccionActual().ejecutar()})
 	}
 	
 }
 
 object volverAlMenu inherits Eleccion {
 	override method imagenElegida(){
-		return "imagen-fin-x.png"
+		//return "imagen-fin-x.png"
+		return "volver.png"
 	}
 	
-	override method position() = game.at(5,7)
+	override method position() = game.at(7,7)
 	
 	override method ejecutar(){
+		game.clear()
  		mainMenu.mostrar()
 	}
 }
@@ -34,10 +36,11 @@ object volverAlMenu inherits Eleccion {
 
 object salirDelJuego inherits Eleccion {
 	override method imagenElegida(){
-		return "imagen-fin-esc.png"
+		//return "imagen-fin-esc.png"
+		return "quit.png"
 	}
 	
-	override method position() = game.at(5,5)
+	override method position() = game.at(7,5)
 	
 	override method ejecutar(){
  		game.stop()

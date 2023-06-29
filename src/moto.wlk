@@ -128,6 +128,10 @@ class MotoBasica {
 		game.addVisual(new Trazo(position=posicion))
 	}
 	
+	method perderVida(){
+		jugador.perderVida()
+	}
+	
 }
 
 class MotoRapida inherits MotoBasica {

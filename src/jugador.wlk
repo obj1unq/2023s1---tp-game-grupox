@@ -30,5 +30,8 @@ class Jugador {
 		}
 	}
 	
+	method perderVida(){
+		vida.perderVida()
+	}
 	
 }
