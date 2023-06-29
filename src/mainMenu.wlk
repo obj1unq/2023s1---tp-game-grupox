@@ -232,3 +232,4 @@ object cursorMenu inherits Cursor(position = newGame.position().left(1), menu = 
 
 object cursorEleccion inherits Cursor(position = basica.position().left(1), menu = eleccionDeMotos){
 }
+

@@ -1,7 +1,8 @@
 import wollok.game.*
 import direcciones.*
 import escenario.*
-
+import niveles.*
+import menuFinDeJuego.*
 
 class Estado {
 	method iniciar(moto) {
@@ -22,9 +23,14 @@ object muerto inherits Estado {
 		moto.jugador().vida().perderVida()
 		super(moto)
 		if(moto.jugador().cantidadDeVidas() > 0){
-			//TODO: que cuando muera, reinicie el juego, manteniendo la cantidad de vidas
-			//que le queda a cada jugador
-			//game.clear()
+			nivel1.volverAEmpezar()
+		} else {
+			game.schedule(2000, 
+				{
+					game.clear() 
+					finDelJuego.mostrar()
+				}
+			)
 		}
 	}
 	
@@ -121,6 +127,7 @@ class MotoBasica {
 	method generarTrazo(posicion){
 		game.addVisual(new Trazo(position=posicion))
 	}
+	
 }
 
 class MotoRapida inherits MotoBasica {

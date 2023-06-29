@@ -16,6 +16,12 @@ class Vida {
 		game.addVisual(self)
 	}
 	
+	method puedePerderVida(){
+		if (vidas > 0){
+			
+		}
+	}
+	
 }
 
 class Player {

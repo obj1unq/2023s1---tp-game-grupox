@@ -21,7 +21,8 @@ object nivel1 {
 		self.dibujarPinchos()
 		game.onTick(1000, "pinchos", {pinchos.forEach({p => p.alternarEncendido()})} )
 		game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
-		game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
+		game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
+		//game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
 		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 	}
 	
@@ -74,8 +75,14 @@ object nivel1 {
 		keyboard.d().onPressDo({jugador1.moto().moverSiPuede(derecha,0)})
 		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
 	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
+	    keyboard.up().onPressDo({ jugador2.moto().moverSiPuede(arriba,0)})
+	    keyboard.down().onPressDo({ jugador2.moto().moverSiPuede(abajo,0)})
 	}
 	
-	
+	method volverAEmpezar(){
+		game.clear()
+		self.empezar()
+		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
+	}
 }
 
