@@ -95,7 +95,7 @@ class MotoBasica {
 	method desplazar(direccion, cantidad){
 		direccion.mover(self, cantidad)
 	}
-	
+	//SE PUEDE SACAR PARECE
 	method moverSiPuede(direccion, cantidad){
 		if (self.puedeMover(direccion, cantidad)) {
 			self.direccionApuntada(direccion)
