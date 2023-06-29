@@ -14,7 +14,7 @@ class Muro {
 	method chocar(moto){
 		if(not self.esAtrevesable()){
 		moto.morir()
-		//moto.enemigo().gane()
+		moto.enemigo().gane()
 		}
 	}
 }
@@ -39,7 +39,7 @@ class Pincho {
 	method chocar(moto){
 		if (self.estaEncendido()){
 			moto.morir()
-			//moto.enemigo().gane()
+			moto.enemigo().gane()
 		}
 	}
 }
@@ -49,8 +49,10 @@ class Trazo {
 	var property image = "trazo.png"
 	
 	method chocar(objeto){
-		objeto.morir()
-		//objeto.enemigo().gane()
+		if(not objeto.estaProtegido()) {
+			objeto.morir()
+		objeto.enemigo().gane()
+		}
 	}
 	
 }

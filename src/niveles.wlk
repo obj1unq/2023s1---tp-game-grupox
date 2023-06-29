@@ -5,6 +5,7 @@ import jugador.*
 import direcciones.*
 import visuales.*
 import moto.*
+import powerup.*
 
 object nivel1 {
 	const board = new BoardGround(image = "tron_2.jpg")
@@ -23,6 +24,7 @@ object nivel1 {
 		game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
 		game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
 		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
+		game.onTick(3000, "GENERAR_PODER", {administradorPowerups.generar()})
 	}
 	
 	method dibujarMuros(){
@@ -72,8 +74,14 @@ object nivel1 {
 	method configuracionTeclado(){
 		keyboard.a().onPressDo({jugador1.moto().moverSiPuede(izquierda,0)})
 		keyboard.d().onPressDo({jugador1.moto().moverSiPuede(derecha,0)})
+		keyboard.w().onPressDo({jugador1.moto().moverSiPuede(arriba,0)})
+		keyboard.s().onPressDo({jugador1.moto().moverSiPuede(abajo,0)})
+		keyboard.e().onPressDo({jugador1.usarPowerUp()})
 		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
+		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
 	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
+	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
+	    keyboard.enter().onPressDo({jugador2.usarPowerUp()})
 	}
 	
 	
