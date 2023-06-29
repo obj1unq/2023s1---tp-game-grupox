@@ -1,6 +1,6 @@
 import juego.*
 import wollok.game.*
-import mainMenu.*
+import menu.*
 
 program Tron{
 	juego.configurar()

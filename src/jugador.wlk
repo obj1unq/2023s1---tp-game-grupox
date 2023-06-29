@@ -4,9 +4,8 @@ import visuales.*
 import powerup.*
 
 class Jugador {
-	var property vida
-	//var property position = game.at(1,9)
-	const property moto
+	var property vida = null
+	var property moto = null
 	var property jugadorEnemigo  = null
 	const powerups = #{}
 	
@@ -56,6 +55,22 @@ class Jugador {
 	method usarPoder(power) {
 		power.activar(self)
 		powerups.remove(power)
-	} 
+	}
+}
+
+object crearJugadores {
+	var property tipoDeMotoP1 = "x"
+	var property tipoDeMotoP2 = "x"
 	
+	method crearMoto(tipoDeMoto) {
+		if (tipoDeMoto == "MotoBasica") {
+			return new MotoBasica()
+		} else if (tipoDeMoto == "MotoRapida") {
+			return new MotoRapida()
+		} else return new MotoExplosiva()
+	}
+	
+	method crearVida(x) {
+		return new Vida(position = game.at(x,9))
+	}
 }

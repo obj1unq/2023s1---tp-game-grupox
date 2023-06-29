@@ -8,14 +8,15 @@ import moto.*
 import powerup.*
 
 object nivel1 {
-	const board = new BoardGround(image = "tron_2.jpg")
+	const board = new BoardGround(image = "fondotierra.png")
 	const property pinchos = []
-	const jugador1 = new Jugador(moto=new MotoBasica(), vida = new Vida(position = game.at(2,9)))
-	const jugador2 = new Jugador(moto=new MotoExplosiva(), vida = new Vida(position = game.at(18,9)))	
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
+	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
+	const jugador2 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP2()), vida= crearJugadores.crearVida(18))
 	
 	method empezar(){
+		game.addVisual(board)
 		self.dibujarMuros()
 		self.agregarJugadores()
 		self.configuracionTeclado()
