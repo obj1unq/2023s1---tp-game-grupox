@@ -78,3 +78,28 @@ object quit {
 	
 	method position() = game.at(6,2)
 }
+
+class PowerupGuardado {
+	var property position
+	var powerupAgarrado 
+	
+	method image() {
+		return "simbolo-" + powerupAgarrado + "-icono.png"
+	}
+	
+	method powerupAgarrado(poder) {
+		if(poder.id() == 1) {
+			powerupAgarrado = "limpieza"
+		}
+		else {powerupAgarrado = "proteccion"}
+	} 
+	
+	method powerupUsado() {
+		powerupAgarrado = "vacio"
+	}
+	
+	method agregarPowerupGuardado() {
+		game.addVisual(self)
+	}
+}
+

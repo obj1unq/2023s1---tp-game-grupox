@@ -7,6 +7,7 @@ class Jugador {
 	var property vida = null
 	var property moto = null
 	var property jugadorEnemigo  = null
+	var property bolsilloParaPoder = null
 	const powerups = #{}
 	
 	method cantidadDeVidas(){
@@ -32,6 +33,7 @@ class Jugador {
 		else {
 			powerups.add(power)
 			administradorPowerups.eliminar(power)
+			bolsilloParaPoder.powerupAgarrado(power)
 		}
 	}
 	
@@ -39,7 +41,10 @@ class Jugador {
 		if(powerups.isEmpty()) {
 			game.say(self.moto(), self.mensajePower())
 		}
-		else {self.usarPoder(powerups.uniqueElement()) }
+		else {
+			self.usarPoder(powerups.uniqueElement())
+			bolsilloParaPoder.powerupUsado()
+		}
 	}
 	
 	method mensajePower() {
@@ -68,18 +73,18 @@ object crearJugadores {
 		return new Vida(position = game.at(x,9))
 	}
 	
-//	method comprobarMismaMoto() {
-//		if (self.tipoDeMotoP1() == self.tipoDeMotoP2()) {
-//			self.motosAlternativas(tipoDeMotoP2())
-//		} else return self.crearMoto(self.tipoDeMotoP2())
-//	}
-//	
-//	method motosAlternativas(tipoP2) {
-//		if (tipoP2 == "Basica") {
-//			return new MotoBasica(tipoDeMoto="MotoAlternativa")
-//		} else if (tipoP2 == "Rapida") {
-//			return new MotoRapida(tipoDeMoto="MotoAlternativa")
-//		} else return new MotoExplosiva(tipoDeMoto="MotoAlternativa")
-//	}
+	method comprobarMismaMoto() {
+		if (self.tipoDeMotoP1() == self.tipoDeMotoP2()) {
+			return self.motosAlternativas(self.tipoDeMotoP2())
+		} else return self.crearMoto(self.tipoDeMotoP2())
+	}
+	
+	method motosAlternativas(tipoP2) {
+		if (tipoP2 == "Basica") {
+			return new MotoBasica(tipoDeMoto="MotoAlternativa")
+		} else if (tipoP2 == "Rapida") {
+			return new MotoRapida(tipoDeMoto="MotoAlternativa")
+		} else return new MotoExplosiva(tipoDeMoto="MotoAlternativa")
+	}
 }
 

@@ -29,7 +29,6 @@ object muerto inherits Estado {
 			moto.enemigo().estado(vivo)
 		} else {
 			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
-			//game.schedule(10000, game.stop())
 		}
 	}
 	
@@ -68,7 +67,7 @@ class MotoBasica {
 	const property velocidad = 300 //más baja = más rápido
 	const property tipoDeMoto = "MotoBasica"
 	
-	const trazosGenerados = []
+	const property trazosGenerados = []
 	var property estaProtegido = false
 	
 	method enemigo(){
@@ -157,15 +156,11 @@ class MotoBasica {
 	
 }
 
-class MotoRapida inherits MotoBasica {
+class MotoRapida inherits MotoBasica(tipoDeMoto= "MotoRapida") {
 	var property trazoOn = false
 	
 	override method velocidad() {
 		return super() * 0.75
-	}
-	
-	override method tipoDeMoto() {
-		return "MotoRapida"
 	}
 	
 	override method efectoDeAlcorte() {
@@ -181,14 +176,10 @@ class MotoRapida inherits MotoBasica {
 	
 }
 
-class MotoExplosiva inherits MotoRapida {
+class MotoExplosiva inherits MotoRapida(tipoDeMoto= "MotoExplosiva") {
 	
 	override method velocidad() {
 		return 250
-	}
-	
-	override method tipoDeMoto() {
-		return "MotoExplosiva"
 	}
 	
 	override method generarTrazoRapido(posicion) {
