@@ -87,11 +87,11 @@ object nivel1 {
 		keyboard.w().onPressDo({jugador1.moto().moverSiPuede(arriba,0)})
 		keyboard.s().onPressDo({jugador1.moto().moverSiPuede(abajo,0)})
 		keyboard.e().onPressDo({jugador1.usarPowerUp()})
-		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
-		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
-	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
-	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
 	    keyboard.control().onPressDo({jugador2.usarPowerUp()})
+		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
+	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
+	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
+		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
 	}
 	
 	method volverAEmpezar(){

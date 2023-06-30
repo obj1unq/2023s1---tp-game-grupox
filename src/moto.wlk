@@ -21,12 +21,12 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
-		if(moto.cantidadDeVidas() > 0){
+		if(moto.cantidadDeVidas() > 1){
 			super(moto)
 			moto.perderVida()
-			nivel1.volverAEmpezar()
 			moto.estado(vivo)
 			moto.enemigo().estado(vivo)
+			nivel1.volverAEmpezar()
 		} else {
 			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
 		}
@@ -39,10 +39,6 @@ object muerto inherits Estado {
 }
 
 object ganador inherits Estado {
-	
-	override method iniciar(moto) {
-		super(moto)
-	}
 	
 	override method mensaje(){
 		return "Gane"
