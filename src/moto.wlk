@@ -26,7 +26,7 @@ object muerto inherits Estado {
 			moto.perderVida()
 			nivel1.volverAEmpezar()
 		} else {
-			game.schedule(3000, {imagenFinDeJuego.dibujarFinDeJuego()})
+			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
 			//game.schedule(10000, game.stop())
 		}
 	}

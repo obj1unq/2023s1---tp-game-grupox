@@ -50,13 +50,15 @@ class Imagen {
 	method position()
 }
 
-object imagenFinDeJuego {
+object finDeJuego {
 	const property board = new BoardGround(image = "tron_2.jpg")
 	
-	method dibujarFinDeJuego(){
+	method ejecutarFinDeJuego(){
 		game.addVisual(board)
 		game.addVisual(self.jugadorGanador())
 		game.addVisual(self.jugadorPerdedor())
+		game.addVisual(quit)
+		self.configurarTeclado()
 	}
 	
 	method jugadorGanador(){
@@ -65,6 +67,10 @@ object imagenFinDeJuego {
 	
 	method jugadorPerdedor(){
 		return nivel1.jugadorPerdedor()
+	}
+	
+	method configurarTeclado(){
+		keyboard.x().onPressDo({game.stop()})
 	}
 	
 }

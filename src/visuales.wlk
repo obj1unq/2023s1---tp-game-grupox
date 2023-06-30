@@ -44,7 +44,7 @@ object jugador1Ganador inherits Categoria {
 		return "jugador1-ganador.png"
 	}
 	
-	override method position() = game.at(3, 5)
+	override method position() = game.at(3, 6)
 }
 
 object jugador2Ganador inherits Categoria {
@@ -52,7 +52,7 @@ object jugador2Ganador inherits Categoria {
 		return "jugador2-ganador.png"
 	}
 	
-	override method position() = game.at(3, 5)
+	override method position() = game.at(3, 6)
 }
 
 object jugador1Perdedor inherits Categoria {
@@ -60,7 +60,7 @@ object jugador1Perdedor inherits Categoria {
 		return "jugador1-perdedor.png"
 	}
 	
-	override method position() = game.at(3, 3)
+	override method position() = game.at(4, 4)
 }
 
 object jugador2Perdedor inherits Categoria {
@@ -68,5 +68,13 @@ object jugador2Perdedor inherits Categoria {
 		return "jugador2-perdedor.png"
 	}
 	
-	override method position() = game.at(3, 3)
+	override method position() = game.at(4, 4)
+}
+
+object quit {
+	method image(){
+		return "presionar-x.png"
+	}
+	
+	method position() = game.at(6,2)
 }
