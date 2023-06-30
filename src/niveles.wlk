@@ -9,8 +9,8 @@ import moto.*
 object nivel1 {
 	const board = new BoardGround(image = "tron_2.jpg")
 	const property pinchos = []
-	const jugador1 = new Jugador(moto=new MotoBasica(), vida = new Vida(position = game.at(2,9)))
-	const jugador2 = new Jugador(moto=new MotoExplosiva(), vida = new Vida(position = game.at(18,9)))	
+//	const jugador1 = new Jugador(moto=new MotoBasica(), vida = new Vida(position = game.at(2,9)))
+//	const jugador2 = new Jugador(moto=new MotoExplosiva(), vida = new Vida(position = game.at(18,9)))	
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
 	

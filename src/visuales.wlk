@@ -8,16 +8,14 @@ class Vida {
 		return "vidas-" + vidas.toString() + "corazon.png"
 	}
 	
-	method perderVida() = if (vidas > 0) vidas -= 1 else 
+	method perderVida() {
+		if (vidas > 0) {
+			vidas -= 1
+		} 
+	}  
 	
 	method agregarVida() {
 		game.addVisual(self)
-	}
-	
-	method puedePerderVida(){
-		if (vidas > 0){
-			
-		}
 	}
 	
 }

@@ -20,18 +20,12 @@ class Jugador {
 		return jugadorEnemigo.moto()
 	}
 	
-	method puedeJugar(){
-		return self.cantidadDeVidas() > 0
-	}
-	
-	method validarSiPuedeJugar(){
-		if(not self.puedeJugar()){
-			self.error("No me quedan mas vidas para jugar")
-		}
-	}
-	
 	method perderVida(){
 		vida.perderVida()
 	}
 	
 }
+
+object jugador1 inherits Jugador(moto=new MotoBasica(), vida = new Vida(position = game.at(2,9))){}
+
+object jugador2 inherits Jugador(moto=new MotoExplosiva(), vida = new Vida(position = game.at(18,9))){}	

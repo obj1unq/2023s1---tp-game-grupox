@@ -20,9 +20,9 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
-		moto.jugador().vida().perderVida()
-		super(moto)
-		if(moto.jugador().cantidadDeVidas() > 0){
+		if(moto.cantidadDeVidas() > 0){
+			super(moto)
+			moto.perderVida()
 			nivel1.volverAEmpezar()
 		} else {
 			game.schedule(2000, 
@@ -130,6 +130,10 @@ class MotoBasica {
 	
 	method perderVida(){
 		jugador.perderVida()
+	}
+	
+	method cantidadDeVidas(){
+		return jugador.cantidadDeVidas()
 	}
 	
 }
