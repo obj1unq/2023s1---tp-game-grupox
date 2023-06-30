@@ -7,7 +7,7 @@ import visuales.*
 import moto.*
 
 class Menu {
-	const property board = new BoardGround(image = "tron_2.jpg")
+	var property board = new BoardGround(image = "tron_2.jpg")
 	const property objetosEnElMenu = []
 	
 	method elementoDelMenu(indice) = objetosEnElMenu.get(indice).position().left(1)

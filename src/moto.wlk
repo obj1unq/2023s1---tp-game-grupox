@@ -24,7 +24,7 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
-		if(moto.cantidadDeVidas() > 1){
+		if(moto.puedeJugar()){
 			super(moto)
 			moto.perderVida()
 			nivel1.volverAEmpezar()
@@ -70,6 +70,11 @@ class MotoBasica {
 	method enemigo(){
 		return jugador.motoEnemiga()
 	}
+	
+	method puedeJugar(){
+		return jugador.puedeJugar()
+	}
+	
 	
 	method generarTrazo(posicion){
 		const nuevoTrazo = new Trazo(position= posicion)

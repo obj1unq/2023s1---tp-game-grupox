@@ -22,6 +22,11 @@ class Jugador {
 		return jugadorEnemigo.moto()
 	}
 	
+	method puedeJugar(){
+		return self.cantidadDeVidas() > 1
+	}
+	
+	
 	method perderVida(){
 		vida.perderVida()
 	}
