@@ -59,7 +59,7 @@ class MotoBasica {
 	const property velocidad = 300 //más baja = más rápido
 	const property tipoDeMoto = "MotoBasica"
 	
-	const trazosGenerados = []
+	const property trazosGenerados = []
 	var property estaProtegido = false
 	
 	method enemigo(){
