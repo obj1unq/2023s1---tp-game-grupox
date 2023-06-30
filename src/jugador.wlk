@@ -63,9 +63,9 @@ object crearJugadores {
 	var property tipoDeMotoP2 = "x"
 	
 	method crearMoto(tipoDeMoto) {
-		if (tipoDeMoto == "MotoBasica") {
+		if (tipoDeMoto == "Basica") {
 			return new MotoBasica()
-		} else if (tipoDeMoto == "MotoRapida") {
+		} else if (tipoDeMoto == "Rapida") {
 			return new MotoRapida()
 		} else return new MotoExplosiva()
 	}
