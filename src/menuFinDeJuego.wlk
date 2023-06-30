@@ -1,10 +1,10 @@
-import mainMenu.*
+import menu.*
 import wollok.game.*
 
 object finDelJuego inherits Menu {
 	
 	override method mostrar() {
-		game.addVisual(board)
+		game.addVisual(self.board())
 		self.agregarItem(volverAlMenu)
 		self.agregarItem(salirDelJuego)
 		game.addVisual(cursorFinDeJuego)

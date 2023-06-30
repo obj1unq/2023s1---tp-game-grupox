@@ -1,46 +1,45 @@
 import wollok.game.*
 
-//CREAR UNA SUPER CLASE DE ESCENARIOS PARA HERADR METHODOS 
+class Escenario {
+	method mensaje() = true
+	
+	method chocar(moto) {
+		if (self.mensaje()) {
+			moto.morir()
+		    moto.enemigo().gane()
+	}
+    }
+}
 
-class Muro {
+class BoardGround inherits Escenario {
+	
+	const image 
+	
+	override method mensaje() = false
+	
+	method image() = image
+	
+	method position() = game.origin()
+}
+
+class Muro inherits Escenario {
 	const property position 
 	
 	method image() = "muro.jpg"
 	
-	method esAtrevesable(){
-		return false
-	}
-	//CORREGIR CON HERENCIA, POR AHORA PARA PROBAR FUNCIONALIDAD
-	method chocar(moto){
-		if(not self.esAtrevesable()){
-		moto.morir()
-		moto.enemigo().gane()
-		}
-	}
 }
 
-class Pincho { 
+class Pincho inherits Escenario { 
 	const property position 
 	var encendido = true 
 	method image() = "pincho" + encendido.toString() + ".png"
 	
-	method esAtrevesable(){
-		 return self.estaEncendido()
-	}
-	
-	method estaEncendido(){
+	override method mensaje(){
 		return encendido
 	}
 	
-	
 	method alternarEncendido(){
 		encendido = not encendido
-	}
-	method chocar(moto){
-		if (self.estaEncendido()){
-			moto.morir()
-			moto.enemigo().gane()
-		}
 	}
 }
 class Trazo {
