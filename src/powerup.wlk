@@ -18,6 +18,8 @@ class Powerup {
 
 class Limpieza inherits Powerup {
 	
+	var property id = 1
+	
 	override method activar(jugador) {
 		jugador.moto().limpiarTrazos()
 		jugador.motoEnemiga().limpiarTrazos()
@@ -30,6 +32,7 @@ class Limpieza inherits Powerup {
 
 
 class Proteccion inherits Powerup {
+	var property id = 2
 	
 	override method activar(jugador) {
 		jugador.moto().proteccionActivada()
@@ -58,7 +61,7 @@ object administradorPowerups {
 	
 	const generados = #{}
 	const limite = 1
-	const generadores = [ generadorProteccion]
+	const generadores = [ generadorLimpieza, generadorProteccion]
 	
 	method generar() {
 		if(generados.size() < limite) {

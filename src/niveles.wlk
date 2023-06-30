@@ -12,8 +12,12 @@ object nivel1 {
 	const property pinchos = []
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
-	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
-	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18))
+	
+	const powerDeP1 = new PowerupGuardado(position = game.at(4,9), powerupAgarrado = "vacio")
+	const powerDeP2 = new PowerupGuardado(position = game.at(16,9), powerupAgarrado = "vacio")
+	
+	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2), bolsilloParaPoder = powerDeP1)
+	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18), bolsilloParaPoder= powerDeP2)
 
 	method empezar(){
 		game.addVisual(board)
@@ -65,11 +69,13 @@ object nivel1 {
 		jugador2.vida().agregarVida()
 		player1.agregarPlayer()
 		player2.agregarPlayer()
+		powerDeP1.agregarPowerupGuardado()
+		powerDeP2.agregarPowerupGuardado()
 		jugador1.jugadorEnemigo(jugador2)
 		jugador2.jugadorEnemigo(jugador1)
-		jugador1.moto().position(game.at(0,0)) // CORREGIR URGENTE 
+		jugador1.moto().position(game.at(0,0))
 		jugador2.moto().position(game.at(10,0))
-		game.addVisual(jugador1.moto())//TAMBIEN CORREGIR
+		game.addVisual(jugador1.moto())
 		game.addVisual(jugador2.moto())
 	}
 	
@@ -83,7 +89,7 @@ object nivel1 {
 		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
 	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
 	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
-	    keyboard.enter().onPressDo({jugador2.usarPowerUp()})
+	    keyboard.control().onPressDo({jugador2.usarPowerUp()})
 	}
 	
 	
