@@ -3,6 +3,7 @@ import wollok.game.*
 import menu.*
 
 program Tron{
+	
 	juego.configurar()
 	mainMenu.mostrar()
 	game.start()

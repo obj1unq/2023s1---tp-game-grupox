@@ -20,7 +20,7 @@ class BoardGround inherits Escenario {
 	
 	method image() = image
 	
-	method position() = game.origin()
+	override method position() = game.origin()
 }
 
 class Muro inherits Escenario {
