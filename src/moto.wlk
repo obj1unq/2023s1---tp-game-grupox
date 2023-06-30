@@ -2,7 +2,7 @@ import wollok.game.*
 import direcciones.*
 import escenario.*
 import niveles.*
-import menuFinDeJuego.*
+import menu.*
 
 
 class Estado {
@@ -21,17 +21,13 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
-		if(moto.cantidadDeVidas() > 0){
+		if(moto.cantidadDeVidas() > 1){
 			super(moto)
 			moto.perderVida()
 			nivel1.volverAEmpezar()
 		} else {
-			game.schedule(2000, 
-				{
-					game.clear() 
-					finDelJuego.mostrar()
-				}
-			)
+			game.schedule(3000, {imagenFinDeJuego.dibujarFinDeJuego()})
+			//game.schedule(10000, game.stop())
 		}
 	}
 	

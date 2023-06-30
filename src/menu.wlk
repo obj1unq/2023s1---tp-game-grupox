@@ -50,6 +50,27 @@ class Imagen {
 	method position()
 }
 
+object imagenFinDeJuego {
+	const property board = new BoardGround(image = "tron_2.jpg")
+	
+	method dibujarFinDeJuego(){
+		game.addVisual(board)
+		game.addVisual(self.jugadorGanador())
+		game.addVisual(self.jugadorPerdedor())
+	}
+	
+	method jugadorGanador(){
+		return nivel1.jugadorGanador()
+	}
+	
+	method jugadorPerdedor(){
+		return nivel1.jugadorPerdedor()
+	}
+	
+}
+
+
+
 class Eleccion inherits Imagen {
 	
 	override method position() = game.at(6,7)
@@ -202,7 +223,7 @@ object howTo inherits Eleccion {
 
 class Cursor {
 	var index = 0
-	var property position = game.at(0,0)
+	var property position
 	const property menu = null
 	
 	method image() = "cursor.png" 

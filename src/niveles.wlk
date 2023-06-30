@@ -12,8 +12,8 @@ object nivel1 {
 	const property pinchos = []
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
-	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
-	const jugador2 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP2()), vida= crearJugadores.crearVida(18))
+	var property jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
+	var property jugador2 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP2()), vida= crearJugadores.crearVida(18))
 //	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18))
 
 	method empezar(){
@@ -90,7 +90,13 @@ object nivel1 {
 	method volverAEmpezar(){
 		game.clear()
 		self.empezar()
+		self.configuracionTeclado()
 		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 	}
+	
+	method jugadorGanador() = if (jugador1.cantidadDeVidas() > jugador2.cantidadDeVidas()) jugador1Ganador else jugador2Ganador
+	
+	method jugadorPerdedor() = if (jugador1.cantidadDeVidas() < jugador2.cantidadDeVidas()) jugador1Perdedor else jugador2Perdedor
+
 }
 
