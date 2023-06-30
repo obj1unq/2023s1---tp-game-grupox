@@ -67,7 +67,7 @@ object newGame inherits Eleccion {
 	
 	override method ejecutar() {
 		super()
-		eleccionDeMotos.mostrar()
+		eleccionDeMotosP1.mostrar()
 		keyboard.r().onPressDo({
 			game.clear()
 			mainMenu.mostrar()
@@ -75,95 +75,110 @@ object newGame inherits Eleccion {
 	}
 }
 
-object eleccionDeMotos inherits Menu(board = new BoardGround(image = "eleccionFondo.jpg")) {
+class EleccionDeMotos inherits Menu(board = new BoardGround(image = "eleccionFondo.jpg")) {
+	const xGeneral = 2
+	const xLogo = 12
+	const player = "p1"
+	const property basica = new SeleccionDeMoto (x=xGeneral,y=7,tipoDeMoto="Basica")
+	const property rapida = new SeleccionDeMoto (x=xGeneral,y=5,tipoDeMoto="Rapida")
+	const property explosiva = new SeleccionDeMoto (x=xGeneral,y=3,tipoDeMoto="Explosiva")
+	const property barraBasica = new BarraStat (tipoDeMoto= "Basica", moto= self.basica())
+	const property barraRapida = new BarraStat (tipoDeMoto= "Rapida", moto= self.rapida())
+	const property barraExplosiva = new BarraStat (tipoDeMoto= "Explosiva", moto= self.explosiva())
+	const property logo = new PlayerLogo (player= player, x=xLogo)
+	const property cursor = cursorEleccionP1
 	
 	override method mostrar() {
-		game.addVisual(board)
-		self.agregarItem(basica)
-		game.addVisual(barraBasica)
-		self.agregarItem(rapida)
-		game.addVisual(barraRapida)
-		self.agregarItem(explosiva)
-		game.addVisual(barraExplosiva)
-		game.addVisual(cursorEleccion)
+		game.addVisual(self.board())
+		game.addVisual(self.logo())
+		self.agregarItem(self.basica())
+		game.addVisual(self.barraBasica())
+		self.agregarItem(self.rapida())
+		game.addVisual(self.barraRapida())
+		self.agregarItem(self.explosiva())
+		game.addVisual(self.barraExplosiva())
+		game.addVisual(self.cursor())
 		self.configurarTeclado()
 	}
 	
 	override method configurarTeclado() {
-		keyboard.s().onPressDo({cursorEleccion.bajar()})
-		keyboard.w().onPressDo({cursorEleccion.subir()})
-		keyboard.enter().onPressDo({cursorEleccion.seleccionActual().ejecutar()})
+		keyboard.s().onPressDo({self.cursor().bajar()})
+		keyboard.w().onPressDo({self.cursor().subir()})
+		keyboard.space().onPressDo({self.accionAEjecutar()})
 	}
 	
+	method accionAEjecutar() 
+
 }
 
-object basica inherits Eleccion {
+object eleccionDeMotosP1 inherits EleccionDeMotos {
+	var property motoP1 = "x"
 	
-	override method imagenElegida() {
-		return "motoBasicaAbajo.png"
+	override method accionAEjecutar() {
+		motoP1 = self.cursor().seleccionActual().tipoDeMoto()
+		crearJugadores.tipoDeMotoP1(motoP1)
+		game.clear()
+		eleccionDeMotosP2.mostrar()
+		keyboard.r().onPressDo({
+			game.clear()
+			self.mostrar()
+		})
 	}
+}
+
+object eleccionDeMotosP2 inherits EleccionDeMotos(xGeneral=12, cursor = cursorEleccionP2, xLogo=2, player="p2") {
+	var property motoP2 = "x"
 	
-	override method ejecutar() {
-		super()
-		//falta creacion de moto para cada jugador
+	override method configurarTeclado() {
+		keyboard.down().onPressDo({self.cursor().bajar()})
+		keyboard.up().onPressDo({self.cursor().subir()})
+		keyboard.enter().onPressDo({self.accionAEjecutar()})
+	}	
+	
+	override method accionAEjecutar() {
+		motoP2 = self.cursor().seleccionActual().tipoDeMoto()
+		crearJugadores.tipoDeMotoP2(motoP2)
+		game.clear()
 		nivel1.empezar()
 	}
+	
 }
 
-object rapida inherits Eleccion {
+class SeleccionDeMoto inherits Eleccion {
+	const x = 0
+	const y = 0
+	const property tipoDeMoto = "x"
 	
 	override method imagenElegida() {
-		return "motoRapidaAbajo.png"
+		return "moto" + self.tipoDeMoto() + "Abajo.png"
 	}
 	
-	override method position() = game.at(6,5)
+	override method position() = game.at(x,y)
 	
 	override method ejecutar() {
-		super()
-		//falta creacion de moto para cada jugador
-		nivel1.empezar()
 	}
 }
 
-object explosiva inherits Eleccion {
+class BarraStat inherits Imagen {
+	const property tipoDeMoto = "x"
+	const property moto = "x"
 	
 	override method imagenElegida() {
-		return "motoExplosivaAbajo.png"
+		return "barra" + self.tipoDeMoto() + ".png"
 	}
 	
-	override method position() = game.at(6,3)
-	
-	override method ejecutar() {
-		super()
-		//falta creacion de moto para cada jugador
-		nivel1.empezar()
-	}
+	override method position() = self.moto().position().right(2)
 }
 
-object barraBasica inherits Imagen {
-	override method imagenElegida() {
-		return "barraBasica.png"
-	}
-	
-	override method position() = basica.position().right(2)
-}
-
-object barraRapida inherits Imagen {
+class PlayerLogo inherits Imagen {
+	const property player = "x"
+	const x = 0
 	
 	override method imagenElegida() {
-		return "barraRapida.png"
+		return self.player() + "logo.png"
 	}
 	
-	override method position() = rapida.position().right(2)
-}
-
-object barraExplosiva inherits Imagen {
-	
-	override method imagenElegida() {
-		return "barraExplosiva.png"
-	}
-	
-	override method position() = explosiva.position().right(2)
+	override method position() = game.at(x,4)
 }
 
 object howTo inherits Eleccion {
@@ -230,5 +245,8 @@ class Cursor {
 object cursorMenu inherits Cursor(position = newGame.position().left(1), menu = mainMenu){
 }
 
-object cursorEleccion inherits Cursor(position = basica.position().left(1), menu = eleccionDeMotos){
+object cursorEleccionP1 inherits Cursor(position = eleccionDeMotosP1.basica().position().left(1), menu = eleccionDeMotosP1){
+}
+
+object cursorEleccionP2 inherits Cursor(position = eleccionDeMotosP2.basica().position().left(1), menu = eleccionDeMotosP2){
 }

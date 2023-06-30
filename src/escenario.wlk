@@ -1,5 +1,6 @@
 import wollok.game.*
 
+
 class Escenario{
 	method chocar(moto){
 		if(self.mensaje()){
@@ -12,17 +13,26 @@ class Escenario{
 	}
 }
 
-class Muro inherits Escenario{
+class BoardGround inherits Escenario {
+	
+	const image 
+	
+	override method mensaje() = false
+	
+	method image() = image
+	
+	method position() = game.origin()
+}
+
+class Muro inherits Escenario {
+
 	const property position 
 	
 	method image() = "muro.jpg"
-	
-	override method mensaje(){
-		return true
-	}
+
 }
 
-class Pincho inherits Escenario{ 
+class Pincho inherits Escenario { 
 	const property position 
 	var encendido = true 
 	method image() = "pincho" + encendido.toString() + ".png"
@@ -30,7 +40,6 @@ class Pincho inherits Escenario{
 	override method mensaje(){
 		return encendido
 	}	
-	
 	method alternarEncendido(){
 		encendido = not encendido
 	}
@@ -39,5 +48,10 @@ class Trazo {
 	
 	var property position
 	var property image = "trazo.png"
-	
+	method chocar(objeto){
+		if(not objeto.estaProtegido()) {
+			objeto.morir()
+		objeto.enemigo().gane()
+		}
+	}
 }

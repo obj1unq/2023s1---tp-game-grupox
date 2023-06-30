@@ -8,12 +8,3 @@ object juego {
 	}
 	
 }
-
-
-class BoardGround {
-	const image 
-	
-	method image() = image
-	
-	method position() = game.origin()
-}
