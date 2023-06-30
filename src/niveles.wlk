@@ -12,8 +12,12 @@ object nivel1 {
 	const property pinchos = []
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
-	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
-	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18))
+	
+	const powerDeP1 = new PowerupGuardado(position = game.at(4,9), powerupAgarrado = "vacio")
+	const powerDeP2 = new PowerupGuardado(position = game.at(16,9), powerupAgarrado = "vacio")
+	
+	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2), bolsilloParaPoder = powerDeP1)
+	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18), bolsilloParaPoder= powerDeP2)
 
 	method empezar(){
 		game.addVisual(board)
@@ -25,7 +29,7 @@ object nivel1 {
 		game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
 		game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
 		game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
-		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
+	//	game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 		game.onTick(3000, "GENERAR_PODER", {administradorPowerups.generar()})
 	}
 	
@@ -83,7 +87,7 @@ object nivel1 {
 		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
 	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
 	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
-	    keyboard.enter().onPressDo({jugador2.usarPowerUp()})
+	    keyboard.control().onPressDo({jugador2.usarPowerUp()})
 	}
 	
 	

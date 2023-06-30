@@ -7,6 +7,7 @@ class Jugador {
 	var property vida = null
 	var property moto = null
 	var property jugadorEnemigo  = null
+	var property bolsilloParaPoder = null
 	const powerups = #{}
 	
 	method cantidadDeVidas(){
@@ -38,6 +39,7 @@ class Jugador {
 		else {
 			powerups.add(power)
 			administradorPowerups.eliminar(power)
+			bolsilloParaPoder.powerupAgarrado(power)
 		}
 	}
 	
@@ -45,7 +47,10 @@ class Jugador {
 		if(powerups.isEmpty()) {
 			game.say(self.moto(), self.mensajePower())
 		}
-		else {self.usarPoder(powerups.uniqueElement()) }
+		else {
+			self.usarPoder(powerups.uniqueElement())
+			bolsilloParaPoder.powerupUsado()
+		}
 	}
 	
 	method mensajePower() {

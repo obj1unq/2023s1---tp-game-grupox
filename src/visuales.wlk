@@ -32,6 +32,30 @@ class Player {
 	}
 }
 
+class PowerupGuardado {
+	var property position
+	var powerupAgarrado 
+	
+	method image() {
+		return "simbolo-" + powerupAgarrado + "-icono.png"
+	}
+	
+	method powerupAgarrado(poder) {
+		if(poder.id() == 1) {
+			powerupAgarrado = "limpieza"
+		}
+		else {powerupAgarrado = "proteccion"}
+	} 
+	
+	method powerupUsado() {
+		powerupAgarrado = "vacio"
+	}
+	
+	method agregarPowerupGuardado() {
+		game.addVisual(self)
+	}
+}
+
 //object vidaJugador1 {
 //	//const property vida = new Vida (vidas = [game.at(17, 9), game.at(18, 9), game.at(19, 9)])
 //	const property vida = new Vida(vidas = [game.at(17, 9), game.at(18, 9), game.at(19, 9)])
