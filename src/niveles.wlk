@@ -29,7 +29,7 @@ object nivel1 {
 		game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
 		game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
 		game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
-	//	game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
+		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 		game.onTick(3000, "GENERAR_PODER", {administradorPowerups.generar()})
 	}
 	
@@ -69,11 +69,13 @@ object nivel1 {
 		jugador2.vida().agregarVida()
 		player1.agregarPlayer()
 		player2.agregarPlayer()
+		powerDeP1.agregarPowerupGuardado()
+		powerDeP2.agregarPowerupGuardado()
 		jugador1.jugadorEnemigo(jugador2)
 		jugador2.jugadorEnemigo(jugador1)
-		jugador1.moto().position(game.at(0,0)) // CORREGIR URGENTE 
+		jugador1.moto().position(game.at(0,0))
 		jugador2.moto().position(game.at(10,0))
-		game.addVisual(jugador1.moto())//TAMBIEN CORREGIR
+		game.addVisual(jugador1.moto())
 		game.addVisual(jugador2.moto())
 	}
 	
