@@ -4,6 +4,7 @@ import escenario.*
 import niveles.*
 import menuFinDeJuego.*
 
+
 class Estado {
 	method iniciar(moto) {
 		game.say(moto,  self.mensaje() + "Me quedan " + moto.jugador().cantidadDeVidas() + " vidas")
@@ -66,9 +67,30 @@ class MotoBasica {
 	const property velocidad = 300 //más baja = más rápido
 	const property tipoDeMoto = "MotoBasica"
 	
+	const trazosGenerados = []
+	var property estaProtegido = false
+	
 	method enemigo(){
 		return jugador.motoEnemiga()
 	}
+	
+	method generarTrazo(posicion){
+		const nuevoTrazo = new Trazo(position= posicion)
+		game.addVisual(nuevoTrazo)
+		trazosGenerados.add(nuevoTrazo)
+	} 
+	
+
+	method limpiarTrazos() {
+		trazosGenerados.forEach({trazo => game.removeVisual(trazo)})
+		trazosGenerados.clear()
+	}
+	
+	method proteccionActivada() {
+		estaProtegido = true
+		game.schedule(2000, { estaProtegido = false })
+	}
+	
 	
 	method image() {
 		return self.tipoDeMoto() + self.direccionApuntada().toString() + ".png"
@@ -122,10 +144,6 @@ class MotoBasica {
 	
 	method efectoDeAlcorte() {
 		self.generarTrazo(self.posicionAnterior())
-	}
-	
-	method generarTrazo(posicion){
-		game.addVisual(new Trazo(position=posicion))
 	}
 	
 	method perderVida(){
@@ -192,5 +210,6 @@ class MotoExplosiva inherits MotoRapida {
 	method apuntaHaciaIzquierdaODerecha() {
 		return direccionApuntada == izquierda or direccionApuntada == derecha
 	}
+	
 }
 	

@@ -5,12 +5,13 @@ import jugador.*
 import direcciones.*
 import visuales.*
 import moto.*
+import powerup.*
 
 object nivel1 {
 	const board = new BoardGround(image = "tron_2.jpg")
 	const property pinchos = []
-//	const jugador1 = new Jugador(moto=new MotoBasica(), vida = new Vida(position = game.at(2,9)))
-//	const jugador2 = new Jugador(moto=new MotoExplosiva(), vida = new Vida(position = game.at(18,9)))	
+	const jugador1 = new Jugador(moto=new MotoBasica(), vida = new Vida(position = game.at(2,9)))
+	const jugador2 = new Jugador(moto=new MotoExplosiva(), vida = new Vida(position = game.at(18,9)))	
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
 	
@@ -24,6 +25,7 @@ object nivel1 {
 		game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
 		//game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
 		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
+		game.onTick(3000, "GENERAR_PODER", {administradorPowerups.generar()})
 	}
 	
 	method dibujarMuros(){
@@ -73,10 +75,14 @@ object nivel1 {
 	method configuracionTeclado(){
 		keyboard.a().onPressDo({jugador1.moto().moverSiPuede(izquierda,0)})
 		keyboard.d().onPressDo({jugador1.moto().moverSiPuede(derecha,0)})
+		keyboard.w().onPressDo({jugador1.moto().moverSiPuede(arriba,0)})
+		keyboard.s().onPressDo({jugador1.moto().moverSiPuede(abajo,0)})
+		keyboard.e().onPressDo({jugador1.usarPowerUp()})
 		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
+		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
 	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
-	    keyboard.up().onPressDo({ jugador2.moto().moverSiPuede(arriba,0)})
-	    keyboard.down().onPressDo({ jugador2.moto().moverSiPuede(abajo,0)})
+	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
+	    keyboard.enter().onPressDo({jugador2.usarPowerUp()})
 	}
 	
 	method volverAEmpezar(){

@@ -49,8 +49,10 @@ class Trazo {
 	var property image = "trazo.png"
 	
 	method chocar(objeto){
-		objeto.morir()
+		if(not objeto.estaProtegido()) {
+			objeto.morir()
 		objeto.enemigo().gane()
+		}
 	}
 	
 }
