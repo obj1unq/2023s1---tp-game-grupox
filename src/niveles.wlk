@@ -97,6 +97,8 @@ object nivel1 {
 	method volverAEmpezar(){
 		game.clear()
 		self.empezar()
+		jugador1.moto().direccionApuntada(arriba)
+		jugador2.moto().direccionApuntada(arriba)
 		game.onTick(jugador1.moto().velocidad(), "ALKORTE1", {jugador1.moto().alcorte()})
 		game.onTick(jugador2.moto().velocidad(), "ALKORTE2", {jugador2.moto().alcorte()})
 	}

@@ -23,7 +23,7 @@ class Jugador {
 	}
 	
 	method puedeJugar(){
-		return self.cantidadDeVidas() > 1
+		return self.cantidadDeVidas() > 0
 	}
 	
 	

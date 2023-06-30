@@ -24,9 +24,9 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
+		moto.perderVida()
 		if(moto.puedeJugar()){
 			super(moto)
-			moto.perderVida()
 			nivel1.volverAEmpezar()
 		} else {
 			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
