@@ -11,6 +11,17 @@ class Escenario {
     }
 }
 
+class BoardGround inherits Escenario {
+	
+	const image 
+	
+	override method mensaje() = false
+	
+	method image() = image
+	
+	method position() = game.origin()
+}
+
 class Muro inherits Escenario {
 	const property position 
 	
