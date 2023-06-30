@@ -23,13 +23,12 @@ class Jugador {
 	}
 	
 	method puedeJugar(){
-		return self.cantidadDeVidas() > 0
+		return self.cantidadDeVidas() > 1
 	}
 	
-	method validarSiPuedeJugar(){
-		if(not self.puedeJugar()){
-			self.error("No me quedan mas vidas para jugar")
-		}
+	
+	method perderVida(){
+		vida.perderVida()
 	}
 	
 	method agregarPowerup(power){
@@ -66,7 +65,7 @@ class Jugador {
 object crearJugadores {
 	var property tipoDeMotoP1 = "x"
 	var property tipoDeMotoP2 = "x"
-	
+
 	method crearMoto(tipoDeMoto) {
 		if (tipoDeMoto == "Basica") {
 			return new MotoBasica()
@@ -93,3 +92,4 @@ object crearJugadores {
 		} else return new MotoExplosiva(tipoDeMoto="MotoAlternativa")
 	}
 }
+

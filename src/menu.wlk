@@ -7,7 +7,7 @@ import visuales.*
 import moto.*
 
 class Menu {
-	const property board = new BoardGround(image = "tron_2.jpg")
+	var property board = new BoardGround(image = "tron_2.jpg")
 	const property objetosEnElMenu = []
 	
 	method elementoDelMenu(indice) = objetosEnElMenu.get(indice).position().left(1)
@@ -49,6 +49,33 @@ class Imagen {
 	
 	method position()
 }
+
+object finDeJuego {
+	const property board = new BoardGround(image = "tron_2.jpg")
+	
+	method ejecutarFinDeJuego(){
+		game.addVisual(board)
+		game.addVisual(self.jugadorGanador())
+		game.addVisual(self.jugadorPerdedor())
+		game.addVisual(quit)
+		self.configurarTeclado()
+	}
+	
+	method jugadorGanador(){
+		return nivel1.jugadorGanador()
+	}
+	
+	method jugadorPerdedor(){
+		return nivel1.jugadorPerdedor()
+	}
+	
+	method configurarTeclado(){
+		keyboard.x().onPressDo({game.stop()})
+	}
+	
+}
+
+
 
 class Eleccion inherits Imagen {
 	
@@ -202,7 +229,7 @@ object howTo inherits Eleccion {
 
 class Cursor {
 	var index = 0
-	var property position = game.at(0,0)
+	var property position
 	const property menu = null
 	
 	method image() = "cursor.png" 

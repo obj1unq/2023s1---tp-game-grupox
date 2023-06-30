@@ -8,9 +8,11 @@ class Vida {
 		return "vidas-" + vidas.toString() + "corazon.png"
 	}
 	
-	method perderVida(){
-		vidas -= 1
-	}
+	method perderVida() {
+		if (vidas >= 1) {
+			vidas -= 1
+		} 
+	}  
 	
 	method agregarVida() {
 		game.addVisual(self)
@@ -23,13 +25,58 @@ class Player {
 	var property position
 	
 	method image(){
-//		return "player1-" + numero.toString() + ".png"
 		return "player" + numero.toString() + ".png"
 	}
 	
 	method agregarPlayer(){
 		game.addVisual(self)
 	}
+}
+
+class Categoria {
+	method image()
+	
+	method position()
+}
+
+object jugador1Ganador inherits Categoria {
+	override method image(){
+		return "jugador1-ganador.png"
+	}
+	
+	override method position() = game.at(3, 6)
+}
+
+object jugador2Ganador inherits Categoria {
+	override method image(){
+		return "jugador2-ganador.png"
+	}
+	
+	override method position() = game.at(3, 6)
+}
+
+object jugador1Perdedor inherits Categoria {
+	override method image(){
+		return "jugador1-perdedor.png"
+	}
+	
+	override method position() = game.at(4, 4)
+}
+
+object jugador2Perdedor inherits Categoria {
+	override method image(){
+		return "jugador2-perdedor.png"
+	}
+	
+	override method position() = game.at(4, 4)
+}
+
+object quit {
+	method image(){
+		return "presionar-x.png"
+	}
+	
+	method position() = game.at(6,2)
 }
 
 class PowerupGuardado {
@@ -56,12 +103,3 @@ class PowerupGuardado {
 	}
 }
 
-//object vidaJugador1 {
-//	//const property vida = new Vida (vidas = [game.at(17, 9), game.at(18, 9), game.at(19, 9)])
-//	const property vida = new Vida(vidas = [game.at(17, 9), game.at(18, 9), game.at(19, 9)])
-//}
-//
-//object vidaJugador2 {
-//	//const property vida = new Vida (vidas = [game.at(3, 9), game.at(4, 9), game.at(5, 9)])
-//	const property vida = new Vida(vidas = [game.at(17, 9), game.at(18, 9), game.at(19, 9)])
-//}

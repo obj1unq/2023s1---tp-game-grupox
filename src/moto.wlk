@@ -1,11 +1,17 @@
 import wollok.game.*
 import direcciones.*
 import escenario.*
+import niveles.*
+import menu.*
+import powerup.*
 
 class Estado {
 	method iniciar(moto) {
-		game.say(moto,  self.mensaje() + "Me quedan " + moto.jugador().cantidadDeVidas() + " vidas")
-		game.removeTickEvent("ALKORTE")
+		game.say(moto,  self.mensaje())
+		game.removeTickEvent("ALKORTE1")
+		game.removeTickEvent("ALKORTE2")
+		moto.estado(vivo)
+		moto.enemigo().estado(vivo)
 	}
 	
 	method puedeMover(){
@@ -18,12 +24,12 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
-		moto.jugador().vida().perderVida()
-		super(moto)
-		if(moto.jugador().cantidadDeVidas() > 0){
-			//TODO: que cuando muera, reinicie el juego, manteniendo la cantidad de vidas
-			//que le queda a cada jugador
-			//game.clear()
+		if(moto.puedeJugar()){
+			super(moto)
+			moto.perderVida()
+			nivel1.volverAEmpezar()
+		} else {
+			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
 		}
 	}
 	
@@ -33,7 +39,7 @@ object muerto inherits Estado {
 
 }
 
-object ganador inherits Estado { 
+object ganador inherits Estado {
 	
 	override method mensaje(){
 		return "Gane"
@@ -43,7 +49,6 @@ object ganador inherits Estado {
 
 object vivo {
 	method iniciar(moto){
-		
 	}	
 	method puedeMover(){
 		return true
@@ -51,7 +56,7 @@ object vivo {
 }
 
 class MotoBasica {
-	var property estado = vivo
+	var estado = vivo
 	var property position = game.at(0,0)
 	var property direccionApuntada  = arriba
 	var property posicionAnterior = game.at(0,0)	
@@ -65,6 +70,11 @@ class MotoBasica {
 	method enemigo(){
 		return jugador.motoEnemiga()
 	}
+	
+	method puedeJugar(){
+		return jugador.puedeJugar()
+	}
+	
 	
 	method generarTrazo(posicion){
 		const nuevoTrazo = new Trazo(position= posicion)
@@ -136,6 +146,14 @@ class MotoBasica {
 	
 	method efectoDeAlcorte() {
 		self.generarTrazo(self.posicionAnterior())
+	}
+	
+	method perderVida(){
+		jugador.perderVida()
+	}
+	
+	method cantidadDeVidas(){
+		return jugador.cantidadDeVidas()
 	}
 	
 }

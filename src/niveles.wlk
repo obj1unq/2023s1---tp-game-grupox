@@ -10,6 +10,7 @@ import powerup.*
 object nivel1 {
 	const board = new BoardGround(image= "fondotierra.png")
 	const property pinchos = []
+	
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
 	
@@ -18,6 +19,7 @@ object nivel1 {
 	
 	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2), bolsilloParaPoder = powerDeP1)
 	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18), bolsilloParaPoder= powerDeP2)
+
 
 	method empezar(){
 		game.addVisual(board)
@@ -28,8 +30,8 @@ object nivel1 {
 		game.onTick(1000, "pinchos", {pinchos.forEach({p => p.alternarEncendido()})} )
 		game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
 		game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
-		game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
-		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
+		game.onTick(jugador1.moto().velocidad(), "ALKORTE1", {jugador1.moto().alcorte()})
+		game.onTick(jugador2.moto().velocidad(), "ALKORTE2", {jugador2.moto().alcorte()})
 		game.onTick(3000, "GENERAR_PODER", {administradorPowerups.generar()})
 	}
 	
@@ -85,13 +87,23 @@ object nivel1 {
 		keyboard.w().onPressDo({jugador1.moto().moverSiPuede(arriba,0)})
 		keyboard.s().onPressDo({jugador1.moto().moverSiPuede(abajo,0)})
 		keyboard.e().onPressDo({jugador1.usarPowerUp()})
-		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
-		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
-	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
-	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
 	    keyboard.control().onPressDo({jugador2.usarPowerUp()})
+		keyboard.up().onPressDo({jugador2.moto().moverSiPuede(arriba,0)})
+	    keyboard.down().onPressDo({jugador2.moto().moverSiPuede(abajo,0)})
+	    keyboard.right().onPressDo({ jugador2.moto().moverSiPuede(derecha,0)})
+		keyboard.left().onPressDo({ jugador2.moto().moverSiPuede(izquierda,0)})
 	}
 	
+	method volverAEmpezar(){
+		game.clear()
+		self.empezar()
+		game.onTick(jugador1.moto().velocidad(), "ALKORTE1", {jugador1.moto().alcorte()})
+		game.onTick(jugador2.moto().velocidad(), "ALKORTE2", {jugador2.moto().alcorte()})
+	}
 	
+	method jugadorGanador() = if (jugador1.cantidadDeVidas() > jugador2.cantidadDeVidas()) jugador1Ganador else jugador2Ganador
+	
+	method jugadorPerdedor() = if (jugador1.cantidadDeVidas() < jugador2.cantidadDeVidas()) jugador1Perdedor else jugador2Perdedor
+
 }
 
