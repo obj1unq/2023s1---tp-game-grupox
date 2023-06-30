@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+WollTron
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Gardella, Ian
+- Mosquera, Facundo
+- Bauhoffer, Matías
+- Borzi, Emiliano
 
 ## Capturas
 
@@ -17,6 +18,6 @@
 
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Objetos 1 - Comisión 2 - UNQ
+- Versión de wollok 3.0
+- Una vez terminado, no tenemos problemas en que el repositorio sea público

@@ -1,6 +1,70 @@
 
-test "testX" {
+import jugador.*
+import moto.*
+import menu.*
+import niveles.*
+import powerup.*
+import juego.*
+import direcciones.*
+import wollok.game.*
+import escenario.*
 
-	assert.that(true)
+describe "PruebasMoto"{
+	const motoBasica = new MotoBasica()
+	
+	test "Moto Basica Viva"{
+		assert.equals(motoBasica.estado(), vivo)
+	}
+	
+	test "Mover Moto"{
+		const positionVieja = motoBasica.position()
+		motoBasica.desplazar(arriba, 1)
+		assert.equals(motoBasica.position(), positionVieja.up(1))
+	}
+	
+	test "Moto Generar Trazo"{
+		motoBasica.alcorte()
+		assert.equals(1, motoBasica.trazosGenerados().size()) 
+	}
+}
 
+describe "PruebaPoderes"{
+	const motoBasica = new MotoBasica()
+	const jugadorPrueba = new Jugador(moto = motoBasica)
+	const proteccion = new Proteccion()
+	const limpieza = new Limpieza()
+	
+	
+	test "probar proteccion"{
+		proteccion.activar(jugadorPrueba)
+		assert.that(jugadorPrueba.moto().estaProtegido())
+	}
+	
+	test "limpiarTrazo"{
+		motoBasica.alcorte()
+		assert.equals(1, motoBasica.trazosGenerados().size())
+		motoBasica.limpiarTrazos()
+		assert.equals(0, motoBasica.trazosGenerados().size())
+	}
+	
+}
+
+
+describe "Jugador"{
+	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
+	
+	
+	test "Jugador Perder Vida" {
+		jugador1.vida().perderVida()
+		assert.equals(2, jugador1.cantidadDeVidas())
+	}
+	
+	test "Jugador puede Jugar"{
+		jugador1.vida().perderVida()
+		assert.equals(2, jugador1.cantidadDeVidas())
+		jugador1.vida().perderVida()
+		jugador1.vida().perderVida()
+		assert.notThat(jugador1.puedeJugar())
+	}
+	
 }
