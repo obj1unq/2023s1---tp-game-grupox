@@ -74,17 +74,17 @@ object crearJugadores {
 		return new Vida(position = game.at(x,9))
 	}
 	
-//	method comprobarMismaMoto() {
-//		if (self.tipoDeMotoP1() == self.tipoDeMotoP2()) {
-//			self.motosAlternativas(tipoDeMotoP2())
-//		} else return self.crearMoto(self.tipoDeMotoP2())
-//	}
-//	
-//	method motosAlternativas(tipoP2) {
-//		if (tipoP2 == "Basica") {
-//			return new MotoBasica(tipoDeMoto="MotoAlternativa")
-//		} else if (tipoP2 == "Rapida") {
-//			return new MotoRapida(tipoDeMoto="MotoAlternativa")
-//		} else return new MotoExplosiva(tipoDeMoto="MotoAlternativa")
-//	}
+	method comprobarMismaMoto() {
+		if (self.tipoDeMotoP1() == self.tipoDeMotoP2()) {
+			return self.motosAlternativas(self.tipoDeMotoP2())
+		} else return self.crearMoto(self.tipoDeMotoP2())
+	}
+	
+	method motosAlternativas(tipoP2) {
+		if (tipoP2 == "Basica") {
+			return new MotoBasica(tipoDeMoto="MotoAlternativa")
+		} else if (tipoP2 == "Rapida") {
+			return new MotoRapida(tipoDeMoto="MotoAlternativa")
+		} else return new MotoExplosiva(tipoDeMoto="MotoAlternativa")
+	}
 }

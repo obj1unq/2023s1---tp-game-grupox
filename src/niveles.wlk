@@ -13,8 +13,7 @@ object nivel1 {
 	const player1 = new Player(numero=1, position = game.at(1,9))
 	const player2 = new Player(numero=2, position = game.at(17,9))
 	const jugador1 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP1()), vida= crearJugadores.crearVida(2))
-	const jugador2 = new Jugador(moto=crearJugadores.crearMoto(crearJugadores.tipoDeMotoP2()), vida= crearJugadores.crearVida(18))
-//	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18))
+	const jugador2 = new Jugador(moto=crearJugadores.comprobarMismaMoto(), vida= crearJugadores.crearVida(18))
 
 	method empezar(){
 		game.addVisual(board)
