@@ -2,8 +2,6 @@ import wollok.game.*
 import direcciones.*
 import escenario.*
 
-
-
 class Estado {
 	method iniciar(moto) {
 		game.say(moto,  self.mensaje() + "Me quedan " + moto.jugador().cantidadDeVidas() + " vidas")
@@ -198,4 +196,3 @@ class MotoExplosiva inherits MotoRapida {
 	}
 	
 }
-	
