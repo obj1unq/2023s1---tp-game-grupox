@@ -8,7 +8,10 @@ import powerup.*
 class Estado {
 	method iniciar(moto) {
 		game.say(moto,  self.mensaje())
-		game.removeTickEvent("ALKORTE")
+		game.removeTickEvent("ALKORTE1")
+		game.removeTickEvent("ALKORTE2")
+		moto.estado(vivo)
+		moto.enemigo().estado(vivo)
 	}
 	
 	method puedeMover(){
@@ -24,8 +27,6 @@ object muerto inherits Estado {
 		if(moto.cantidadDeVidas() > 1){
 			super(moto)
 			moto.perderVida()
-			moto.estado(vivo)
-			moto.enemigo().estado(vivo)
 			nivel1.volverAEmpezar()
 		} else {
 			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
