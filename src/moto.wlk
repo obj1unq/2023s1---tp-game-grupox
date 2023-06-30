@@ -3,11 +3,11 @@ import direcciones.*
 import escenario.*
 import niveles.*
 import menu.*
-
+import powerup.*
 
 class Estado {
 	method iniciar(moto) {
-		game.say(moto,  self.mensaje() + "Me quedan " + moto.jugador().cantidadDeVidas() + " vidas")
+		game.say(moto,  self.mensaje())
 		game.removeTickEvent("ALKORTE")
 	}
 	
@@ -21,10 +21,12 @@ class Estado {
 object muerto inherits Estado {
 	
 	override method iniciar(moto){
-		if(moto.cantidadDeVidas() > 1){
+		if(moto.cantidadDeVidas() > 0){
 			super(moto)
 			moto.perderVida()
 			nivel1.volverAEmpezar()
+			moto.estado(vivo)
+			moto.enemiga().estado(vivo)
 		} else {
 			game.schedule(3000, {finDeJuego.ejecutarFinDeJuego()})
 			//game.schedule(10000, game.stop())
@@ -37,7 +39,11 @@ object muerto inherits Estado {
 
 }
 
-object ganador inherits Estado { 
+object ganador inherits Estado {
+	
+	override method iniciar(moto) {
+		super(moto)
+	}
 	
 	override method mensaje(){
 		return "Gane"
@@ -47,7 +53,6 @@ object ganador inherits Estado {
 
 object vivo {
 	method iniciar(moto){
-		
 	}	
 	method puedeMover(){
 		return true
@@ -55,7 +60,7 @@ object vivo {
 }
 
 class MotoBasica {
-	var property estado = vivo
+	var estado = vivo
 	var property position = game.at(0,0)
 	var property direccionApuntada  = arriba
 	var property posicionAnterior = game.at(0,0)	

@@ -9,7 +9,7 @@ class Vida {
 	}
 	
 	method perderVida() {
-		if (vidas > 0) {
+		if (vidas >= 1) {
 			vidas -= 1
 		} 
 	}  

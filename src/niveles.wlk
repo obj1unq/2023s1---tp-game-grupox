@@ -25,7 +25,7 @@ object nivel1 {
 		game.onTick(1000, "pinchos", {pinchos.forEach({p => p.alternarEncendido()})} )
 		game.onCollideDo(jugador1.moto(), { algo => algo.chocar(jugador1.moto())})
 		game.onCollideDo(jugador2.moto(), { algo => algo.chocar(jugador2.moto())})
-		//game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
+		game.onTick(jugador1.moto().velocidad(), "ALKORTE", {jugador1.moto().alcorte()})
 		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 		game.onTick(3000, "GENERAR_PODER", {administradorPowerups.generar()})
 	}
@@ -90,8 +90,6 @@ object nivel1 {
 	method volverAEmpezar(){
 		game.clear()
 		self.empezar()
-		self.configuracionTeclado()
-		game.onTick(jugador2.moto().velocidad(), "ALKORTE", {jugador2.moto().alcorte()})
 	}
 	
 	method jugadorGanador() = if (jugador1.cantidadDeVidas() > jugador2.cantidadDeVidas()) jugador1Ganador else jugador2Ganador
